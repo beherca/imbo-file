@@ -1,0 +1,31 @@
+{
+  "name": "beherca/imbo-file",
+  "type": "library",
+  "description": "File component for imbo to support file storage and metadata",
+  "keywords": [ "file storage", "file compress", "file metadata" ],
+  "homepage": "https://github.com/beherca/imbo-file.git",
+  "license": "MIT",
+  "authors": [{
+      "name": "beherca",
+      "email": "beherca@gmail.com",
+      "role": "Project contributor",
+      "homepage": "https://github.com/beherca/imbo-file.git"
+    }
+  ],
+  "require": {
+    "php": ">=5.4.0",
+    "imbo": "~0.3"
+  },
+  "require-dev": {
+    "mikey179/vfsStream": "~1.0",
+    "phpunit/phpunit": "~3.0",
+    "behat/behat": "~2.0",
+    "guzzle/guzzle": "~3.0",
+    "doctrine/dbal": "~2.0"
+  },
+  "autoload": {
+    "psr-0": {
+      "ImboFile": "library"
+    }
+  }
+}
