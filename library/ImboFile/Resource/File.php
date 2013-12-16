@@ -85,6 +85,7 @@ class File implements ResourceInterface {
      * @param EventInterface
      */
     public function get(EventInterface $event) {
+        printf('ok--------------');
         $request = $event->getRequest();
         $response = $event->getResponse();
         $eventManager = $event->getManager();
@@ -101,24 +102,9 @@ class File implements ResourceInterface {
         $eventManager->trigger('db.file.load');
         $eventManager->trigger('storage.file.load');
 
-        // Generate ETag using public key, image identifier, Accept headers of the user agent and
-        // the requested URI
-        $etag = '"' . md5(
-            $publicKey .
-            $fileIdentifier .
-            $request->headers->get('Accept', '*/*') .
-            $request->getRequestUri()
-        ) . '"';
-
-        // Set some response headers before we apply optional transformations
-//         $response->setEtag($etag)
-//                  ->setMaxAge(31536000);
-
         // Custom Imbo headers
         $response->headers->add(array(
             'X-Imbo-OriginalMimeType' => $file->getMimeType(),
-            'X-Imbo-OriginalWidth' => $file->getWidth(),
-            'X-Imbo-OriginalHeight' => $file->getHeight(),
             'X-Imbo-OriginalFileSize' => $file->getFilesize(),
             'X-Imbo-OriginalExtension' => $file->getExtension(),
         ));

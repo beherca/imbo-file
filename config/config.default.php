@@ -12,19 +12,6 @@ namespace Imbo;
 
 $config = array(
     /**
-     * Authentication
-     *
-     * This value must be set to an array with key => value pairs mapping to public and private keys
-     * of the users of this installation. The public keys must match the following case sensitive
-     * expression:
-     *
-     * ^[a-z0-9_-]{3,}$
-     *
-     * @var array
-     */
-    'auth' => array(),
-
-    /**
      * Database adapter
      *
      * See the different adapter implementations for possible configuration parameters. The value
@@ -34,7 +21,7 @@ $config = array(
      * @var Imbo\Database\DatabaseInterface|Closure
      */
     'database' => function() {
-        return new Database\MongoDB();
+        return new ImboFile\Database\MongoDB();
     },
 
     /**
@@ -47,7 +34,7 @@ $config = array(
      * @var Imbo\Storage\StorageInterface|Closure
      */
     'storage' => function() {
-        return new Storage\GridFS();
+        return new ImboFile\Storage\GridFS();
     },
 
     /**
@@ -156,8 +143,7 @@ $config = array(
      * @var array
      */
     'eventListeners' => array(
-        'accessToken' => 'Imbo\EventListener\AccessToken',
-        'auth' => 'Imbo\EventListener\Authenticate',
+        //'compress' => 'ImboFile\EventListener\CompressFile',
     ),
 
     /**
@@ -166,7 +152,9 @@ $config = array(
      * @link http://docs.imbo-project.org
      * @var array
      */
-    'resources' => array(),
+    'resources' => array(
+        'file' => "ImboFile\Resource\File",
+    ),
 
     /**
      * Custom routes for Imbo
@@ -174,7 +162,10 @@ $config = array(
      * @link http://docs.imbo-project.org
      * @var array
      */
-    'routes' => array(),
+    'routes' => array(
+        'file'    => '#^/users/(?<publicKey>[a-z0-9_-]{3,})/files/(?<fileIdentifier>[a-f0-9]{32})(\.(?<extension>doc|excel|txt|zip|rar|pdf|zip|ppt|csv))?$#',
+        'files'   => '#^/users/(?<publicKey>[a-z0-9_-]{3,})/files(/|(\.(?<extension>json|xml)))?$#',
+        'filemetadata' => '#^/users/(?<publicKey>[a-z0-9_-]{3,})/files/(?<fileIdentifier>[a-f0-9]{32})/meta(?:data)?(/|\.(?<extension>json|xml))?$#',
+    ),
 );
-
 return $config;
