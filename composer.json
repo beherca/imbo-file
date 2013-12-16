@@ -1,7 +1,7 @@
 {
   "name": "beherca/imbo-file",
   "type": "library",
-  "version" : "0.0.1-dev",
+  "version" : "0.0.1",
   "description": "File component for imbo to support file storage and metadata",
   "keywords": [ "file storage", "file compress", "file metadata" ],
   "homepage": "https://github.com/beherca/imbo-file.git",
