@@ -11,8 +11,8 @@
 
 namespace ImboFile\Database;
 
-use Imbo;
 use ImboFile\Model\File,
+    Imbo\Database\Doctrine,
     Imbo\Exception\DatabaseException,
     Imbo\Exception\InvalidArgumentException,
     Imbo\Exception,
@@ -38,7 +38,7 @@ use ImboFile\Model\File,
  * @author Beherca <beherca@gmail.com>
  * @package Database
  */
-class Doctrine extends Imbo\Database\Doctrine{
+class FileDoctrine extends Doctrine{
     /**
      * Extra table names for the database
      *

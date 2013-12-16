@@ -8,9 +8,11 @@
  * distributed with this source code.
  */
 
-namespace Imbo\Database;
+namespace ImboFile\Database;
 
-use Imbo\Model\Image,
+use ImboFile\Model\File,
+    Imbo\Database\MongoDB,
+    Imbo\Database\DatabaseInterface,
     Imbo\Resource\Images\Query,
     Imbo\Exception\DatabaseException,
     MongoClient,
@@ -35,7 +37,7 @@ use Imbo\Model\Image,
  * @author Christer Edvartsen <cogo@starzinger.net>
  * @package Database
  */
-class MongoDB implements DatabaseInterface {
+class FileMongoDB extends MongoDB {
     /**
      * Mongo client instance
      *

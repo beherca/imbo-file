@@ -9,6 +9,8 @@
  */
 
 namespace Imbo;
+use ImboFile\Database\FileDoctrine,
+    ImboFile\Database\FileGridFs;
 
 $config = array(
     /**
@@ -21,7 +23,7 @@ $config = array(
      * @var Imbo\Database\DatabaseInterface|Closure
      */
     'database' => function() {
-        return new ImboFile\Database\MongoDB();
+        return new FileMongoDB();
     },
 
     /**
@@ -34,7 +36,7 @@ $config = array(
      * @var Imbo\Storage\StorageInterface|Closure
      */
     'storage' => function() {
-        return new ImboFile\Storage\GridFS();
+        return new FileGridFS();
     },
 
     /**
