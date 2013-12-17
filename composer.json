@@ -15,10 +15,10 @@
   ],
   "require": {
     "php": ">=5.4.0",
-    "imbo/imbo": "dev-develop"
+    "imbo/imbo": "dev-imbo-file"
   },
   "require-dev": {
-    "imbo/imbo": "dev-develop"
+    "imbo/imbo": "dev-imbo-file"
   },
   "autoload": {
     "psr-0": {
