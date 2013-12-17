@@ -183,5 +183,10 @@ $config = array(
         'files'   => '#^/users/(?<publicKey>[a-z0-9_-]{3,})/files(/|(\.(?<extension>json|xml)))?$#',
         'filemetadata' => '#^/users/(?<publicKey>[a-z0-9_-]{3,})/files/(?<fileIdentifier>[a-f0-9]{32})/meta(?:data)?(/|\.(?<extension>json|xml))?$#',
     ),
+    
+    'formatters' => array(
+        'json' => 'ImboFile\Http\Response\Formatter\JSON',
+        'xml'  => 'ImboFile\Http\Response\Formatter\XML',
+    ),
 );
 return $config;
