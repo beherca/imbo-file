@@ -11,6 +11,7 @@
 namespace ImboFile\Http\Response\Formatter;
 
 use Imbo\Http\Response\Formatter\XML as ImboXML,
+    Imbo\Model as ImboModel,
     ImboFile\Model;
 
 /**
@@ -100,9 +101,9 @@ IMAGES;
   /**
    * {@inheritdoc}
    */
-  public function format(Model\ModelInterface $model) {
-    if ($model instanceof Model\File) {
-      return $this->formatFile($model);
+  public function format(ImboModel\ModelInterface $model) {
+    if ($model instanceof Model\Files) {
+      return $this->formatFiles($model);
     }
     parent::format($model);
   }

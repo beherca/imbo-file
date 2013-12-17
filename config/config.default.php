@@ -159,7 +159,19 @@ $config = array(
      * @var array
      */
     'eventListeners' => array(
-        //'compress' => 'ImboFile\EventListener\CompressFile',
+        //'file.compress' => 'ImboFile\EventListener\CompressFile',
+        //use the same name to override default formatter
+        'Imbo\Http\Response\ResponseFormatter' => array(
+            'listener' => 'ImboFile\Http\Response\ResponseFormatter',
+            'params' => array(
+                array(
+                    'json' => new \ImboFile\Http\Response\Formatter\JSON(new Helpers\DateFormatter()),
+                    'xml'  => new \ImboFile\Http\Response\Formatter\XML(new Helpers\DateFormatter()),
+                ),
+                new Http\ContentNegotiation(),
+            ),
+            'priority' => 1,
+        ),
     ),
 
     /**
@@ -182,11 +194,6 @@ $config = array(
         'file'    => '#^/users/(?<publicKey>[a-z0-9_-]{3,})/files/(?<fileIdentifier>[a-f0-9]{32})(\.(?<extension>doc|excel|txt|zip|rar|pdf|zip|ppt|csv))?$#',
         'files'   => '#^/users/(?<publicKey>[a-z0-9_-]{3,})/files(/|(\.(?<extension>json|xml)))?$#',
         'filemetadata' => '#^/users/(?<publicKey>[a-z0-9_-]{3,})/files/(?<fileIdentifier>[a-f0-9]{32})/meta(?:data)?(/|\.(?<extension>json|xml))?$#',
-    ),
-    
-    'formatters' => array(
-        'json' => 'ImboFile\Http\Response\Formatter\JSON',
-        'xml'  => 'ImboFile\Http\Response\Formatter\XML',
     ),
 );
 return $config;

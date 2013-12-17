@@ -8,10 +8,11 @@
  * distributed with this source code.
  */
 
-namespace Imbo\Http\Response\Formatter;
+namespace ImboFile\Http\Response\Formatter;
 
 use Imbo\Http\Response\Formatter\JSON as ImboJSON,
-    ImboFile\Model,
+    Imbo\Model as ImboModel,
+    ImboFile\Model\File,
     stdClass;
 
 /**
@@ -25,7 +26,7 @@ class JSON extends ImboJSON{
   /**
    * {@inheritdoc}
    */
-  public function format(Model\Files $model) {
+  public function formatFiles(Model\Files $model) {
     $files = $model->getFiles();
     $data = array();
   
@@ -77,9 +78,9 @@ class JSON extends ImboJSON{
   /**
    * {@inheritdoc}
    */
-  public function format(Model\ModelInterface $model) {
+  public function format(ImboModel\ModelInterface $model) {
     if ($model instanceof Model\File) {
-      return $this->formatFile($model);
+      return $this->formatFiles($model);
     }
     parent::format($model);
   }
