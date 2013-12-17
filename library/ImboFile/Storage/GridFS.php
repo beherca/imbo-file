@@ -3,15 +3,15 @@
  * This file is part of the Imbo package
  *
  * (c) Christer Edvartsen <cogo@starzinger.net>
- *
+ * (c) Beherca <beherca@gmail.com>
  * For the full copyright and license information, please view the LICENSE file that was
  * distributed with this source code.
  */
 
 namespace ImboFile\Storage;
 
-use Imbo\Model\Image,
-    Imbo\Storage\GridFS,
+use ImboFile\Model\File,
+    Imbo\Storage\GridFS as ImboGridFS,
     Imbo\Exception\StorageException,
     Mongo,
     MongoClient,
@@ -34,8 +34,9 @@ use Imbo\Model\Image,
  *                              array('connect' => true, 'connectTimeoutMS' => 1000).
  *
  * @author Christer Edvartsen <cogo@starzinger.net>
+ * @author Beherca <beherca@gmail.com>
  * @package Storage
  */
-class FileGridFS extends GridFS {
+class GridFS extends ImboGridFS {
     //TODO
 }

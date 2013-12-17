@@ -2,7 +2,7 @@
 /**
  * This file is part of the ImboFile package
  *
- * (c) Kai Li <beherca@gmail.com>
+ * (c) Beherca <beherca@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE file that was
  * distributed with this source code.
@@ -12,12 +12,14 @@ namespace ImboFile\Resource;
 
 use Imbo\Exception\ResourceException,
     Imbo\EventManager\EventInterface,
-    Imbo\Model;
+    Imbo\Model,
+    Imbo\Http\Request\Request,
+    Imbo\Resource\ResourceInterface;
 
 /**
  * File resource
  *
- * @author Kai Li <beherca@gmail.com>
+ * @author Beherca <beherca@gmail.com>
  * @package Resources
  */
 class File implements ResourceInterface {
@@ -109,7 +111,7 @@ class File implements ResourceInterface {
             'X-Imbo-OriginalExtension' => $file->getExtension(),
         ));
 
-        // Trigger possible image transformations
+        // Trigger possible file compression
         $eventManager->trigger('file.compress');
     }
 }

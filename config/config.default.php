@@ -9,8 +9,11 @@
  */
 
 namespace Imbo;
-use ImboFile\Database\FileDoctrine,
-    ImboFile\Database\FileGridFs;
+
+use ImboFile\Database\Doctrine,
+    ImboFile\Database\MongoDB,
+    ImboFile\Database\GridFs,
+    ImboFile\Http\Request;
 
 $config = array(
     /**
@@ -23,7 +26,7 @@ $config = array(
      * @var Imbo\Database\DatabaseInterface|Closure
      */
     'database' => function() {
-        return new FileMongoDB();
+        return new MongoDB();
     },
 
     /**
@@ -36,7 +39,18 @@ $config = array(
      * @var Imbo\Storage\StorageInterface|Closure
      */
     'storage' => function() {
-        return new FileGridFS();
+        return new GridFS();
+    },
+    
+    /**
+     * Custom request
+     *
+     * You can override default imbo request here
+     *
+     * @var Imbo\Request
+     */
+    'request' => function() {
+      return new Request();
     },
 
     /**

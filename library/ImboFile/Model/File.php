@@ -11,7 +11,8 @@
 
 namespace ImboFile\Model;
 
-use DateTime;
+use Imbo\Model\ModelInterface,
+    DateTime;
 
 /**
  * File model
