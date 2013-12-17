@@ -12,7 +12,7 @@ namespace Imbo;
 
 use ImboFile\Database\Doctrine,
     ImboFile\Database\MongoDB,
-    ImboFile\Database\GridFs,
+    ImboFile\Storage\GridFs,
     ImboFile\Http\Request;
 
 $config = array(

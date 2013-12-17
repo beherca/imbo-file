@@ -10,10 +10,9 @@
 
 namespace ImboFile\Resource;
 
-use Imbo\Exception\ResourceException,
+use ImboFile\Model,
+    Imbo\Exception\ResourceException,
     Imbo\EventManager\EventInterface,
-    Imbo\Model,
-    Imbo\Http\Request\Request,
     Imbo\Resource\ResourceInterface;
 
 /**

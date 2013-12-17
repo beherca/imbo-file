@@ -9,7 +9,7 @@
  * distributed with this source code.
  */
 
-namespace Imbo\Http\Request;
+namespace ImboFile\Http\Request;
 
 use ImboFile\Model\File,
     Imbo\Exception\InvalidArgumentException,
