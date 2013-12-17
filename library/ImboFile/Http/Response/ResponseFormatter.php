@@ -27,93 +27,6 @@ use Imbo\EventManager\EventInterface,
  * @package Http
  */
 class ResponseFormatter extends ImboResponseFormatter {
-    /**
-     * Content formatters
-     *
-     * @var array
-     */
-    private $formatters;
-
-    /**
-     * The default mime type to use when formatting a response
-     *
-     * @var string
-     */
-    private $defaultMimeType = 'application/json';
-
-    /**
-     * Mapping from extensions to mime types
-     *
-     * @var array
-     */
-    private $extensionsToMimeType = array(
-        'json' => 'application/json',
-        'xml'  => 'application/xml',
-        'gif'  => 'image/gif',
-        'jpg'  => 'image/jpeg',
-        'png'  => 'image/png',
-    );
-
-    /**
-     * Supported content types and the associated formatter class name or instance, or in the
-     * case of an image model, the resulting image type
-     *
-     * @var array
-     */
-    private $supportedTypes = array(
-        'application/json' => 'json',
-        'application/xml'  => 'xml',
-        'image/gif'        => 'gif',
-        'image/png'        => 'png',
-        'image/jpeg'       => 'jpg',
-    );
-
-    /**
-     * The default types that models support, in a prioritized order
-     *
-     * @var array
-     */
-    private $defaultModelTypes = array(
-        'application/json',
-        'application/xml',
-    );
-
-    /**
-     * The types the different models can be expressed as, if they don't support the default ones,
-     * in a prioritized order. If the user agent sends "Accept: image/*" the first one will be the
-     * one used.
-     *
-     * The keys are the last part of the model name, lowercased:
-     *
-     * Imbo\Model\Image => image
-     * Imbo\Model\FooBar => foobar
-     *
-     * @var array
-     */
-    private $modelTypes = array(
-        'image' => array(
-            'image/jpeg',
-            'image/png',
-            'image/gif',
-        ),
-    );
-
-    /**
-     * The formatter to use
-     *
-     * @var string
-     */
-    private $formatter;
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function getSubscribedEvents() {
-        return array(
-            'response.send' => array('format' => 20),
-            'response.negotiate' => 'negotiate',
-        );
-    }
 
     /**
      * Response send hook
@@ -185,6 +98,6 @@ class ResponseFormatter extends ImboResponseFormatter {
         }
         
         //Prevent Default Formatter
-        $event.stopPropagation();
+        $event->stopPropagation();
     }
 }
