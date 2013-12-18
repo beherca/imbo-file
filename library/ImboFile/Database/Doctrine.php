@@ -977,7 +977,7 @@ class Doctrine implements ImboDatabaseInterface, DatabaseInterface{
     /**
      * {@inheritdoc}
      */
-    public function getNumBytes($publicKey) {
+    public function getFileNumBytes($publicKey) {
       $query = $this->getConnection()->createQueryBuilder();
       $query->select('SUM(i.size)')
       ->from($this->tableNames['fileinfo'], 'i')
@@ -987,15 +987,6 @@ class Doctrine implements ImboDatabaseInterface, DatabaseInterface{
       $stmt = $query->execute();
     
       return (int) $stmt->fetchColumn();
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function getStatus() {
-      $connection = $this->getConnection();
-    
-      return $connection->isConnected() || $connection->connect();
     }
     
     /**
