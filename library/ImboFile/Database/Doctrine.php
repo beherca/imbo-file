@@ -906,7 +906,7 @@ class Doctrine implements ImboDatabaseInterface, DatabaseInterface{
     /**
      * {@inheritdoc}
      */
-    public function load($publicKey, $fileIdentifier, File $file) {
+    public function loadFile($publicKey, $fileIdentifier, File $file) {
       $query = $this->getConnection()->createQueryBuilder();
       $query->select('*')
       ->from($this->tableNames['fileinfo'], 'i')
@@ -935,7 +935,7 @@ class Doctrine implements ImboDatabaseInterface, DatabaseInterface{
     /**
      * {@inheritdoc}
      */
-    public function getLastModified($publicKey, $fileIdentifier = null) {
+    public function getFileLastModified($publicKey, $fileIdentifier = null) {
       $query = $this->getConnection()->createQueryBuilder();
       $query->select('updated')
       ->from($this->tableNames['fileinfo'], 'i')
