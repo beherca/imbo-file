@@ -11,8 +11,9 @@
 namespace ImboFile\Database;
 
 use ImboFile\Model\File,
-    ImboFile\Resource\Files\Query,
+    ImboFile\Resource\Files\Query as FileQuery,
     Imbo\Exception\DatabaseException,
+    Imbo\Database\DatabaseInterface as ImboDatabaseInterface,
     DateTime;
 
 /**
@@ -23,7 +24,7 @@ use ImboFile\Model\File,
  * @author Beherca <beherca@gmail.com>
  * @package Database
  */
-interface DatabaseInterface {
+interface DatabaseInterface extends ImboDatabaseInterface {
     /**
      * Insert a new file
      *
@@ -87,7 +88,7 @@ interface DatabaseInterface {
      * @return array
      * @throws DatabaseException
      */
-    function getFiles($publicKey, Query $query);
+    function getFiles($publicKey, FileQuery $query);
 
     /**
      * Load information from database into the file object

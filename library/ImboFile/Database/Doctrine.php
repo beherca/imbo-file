@@ -12,7 +12,9 @@
 namespace ImboFile\Database;
 
 use ImboFile\Model\File,
-    Imbo\Database\DatabaseInterface as ImboDatabaseInterface,
+    ImboFile\Resource\Files\Query as FileQuery,
+    Imbo\Model\Image,
+    Imbo\Resource\Images\Query,
     Imbo\Exception\DatabaseException,
     Imbo\Exception\InvalidArgumentException,
     Imbo\Exception,
@@ -38,7 +40,7 @@ use ImboFile\Model\File,
  * @author Beherca <beherca@gmail.com>
  * @package Database
  */
-class Doctrine implements ImboDatabaseInterface, DatabaseInterface{
+class Doctrine implements DatabaseInterface{
 /**
      * Parameters for the Doctrine connection
      *
@@ -795,7 +797,7 @@ class Doctrine implements ImboDatabaseInterface, DatabaseInterface{
     /**
      * {@inheritdoc}
      */
-    public function getFiles($publicKey, Query $query) {
+    public function getFiles($publicKey, FileQuery $query) {
       $files = array();
     
       $qb = $this->getConnection()->createQueryBuilder();
