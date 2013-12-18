@@ -96,8 +96,5 @@ class ResponseFormatter extends ImboResponseFormatter {
         if ($request->getMethod() !== 'HEAD') {
             $response->setContent($formattedData);
         }
-        
-        //Prevent Default Formatter
-        $event->stopPropagation();
     }
 }
