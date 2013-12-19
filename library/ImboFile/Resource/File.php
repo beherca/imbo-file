@@ -11,6 +11,7 @@
 namespace ImboFile\Resource;
 
 use ImboFile\Model,
+    Imbo\Model as ImboModel,
     Imbo\Exception\ResourceException,
     Imbo\EventManager\EventInterface,
     Imbo\Resource\ResourceInterface;
@@ -54,7 +55,7 @@ class File implements ResourceInterface {
         $response = $event->getResponse();
         $file = $request->getFile();
 
-        $model = new Model\ArrayModel();
+        $model = new ImboModel\ArrayModel();
         $model->setData(array(
             'fileIdentifier' => $file->getChecksum(),
             'extension' => $file->getExtension(),
@@ -72,7 +73,7 @@ class File implements ResourceInterface {
         $event->getManager()->trigger('db.file.delete');
         $event->getManager()->trigger('storage.file.delete');
 
-        $model = new Model\ArrayModel();
+        $model = new ImboModel\ArrayModel();
         $model->setData(array(
             'fileIdentifier' => $event->getRequest()->getImageIdentifier(),
         ));
@@ -93,7 +94,7 @@ class File implements ResourceInterface {
         $publicKey = $request->getPublicKey();
         $fileIdentifier = $request->getFileIdentifier();
 
-        $file = new Model\File();
+        $file = new ImboModel\File();
         $file->setFileIdentifier($fileIdentifier)
               ->setPublicKey($publicKey);
 

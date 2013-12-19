@@ -10,7 +10,8 @@
 
 namespace ImboFile\EventListener;
 
-use Imbo\EventListener\StorageOperations as ImboStorageOperations;
+use Imbo\EventListener\StorageOperations as ImboStorageOperations,
+    Imbo\EventManager\EventInterface;
 
 /**
  * Storage operations event listener

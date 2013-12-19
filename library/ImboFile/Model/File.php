@@ -39,7 +39,11 @@ class File implements ModelInterface {
         'text/csv'  => 'csv',
         'text/plain' => 'txt',
         'application/pdf' => 'pdf',
-        'application/zip' => 'zip'
+        'application/zip' => 'zip',
+        'image/gif' => 'gif',
+        'image/jpeg' => 'jpeg',
+        'image/png' => 'png',
+        'audio/mp4' => 'mp4',
     );
 
     /**

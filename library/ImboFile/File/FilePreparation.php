@@ -12,8 +12,9 @@ namespace ImboFile\File;
 
 use Imbo\EventManager\EventInterface,
     Imbo\EventListener\ListenerInterface,
-    Imbo\Exception,
+    ImboFile\Exception\FileException,
     ImboFile\Model\File,
+    Imbo\Exception,
     finfo;
 
 /**
@@ -48,7 +49,7 @@ class FilePreparation implements ListenerInterface {
         $fileBlob = $request->getContent();
 
         if (empty($fileBlob)) {
-            $e = new Exception('No file attached', 400);
+            $e = new FileException('No file attached', 400);
             $e->setImboErrorCode(Exception::IMAGE_NO_IMAGE_ATTACHED);
 
             throw $e;
@@ -61,7 +62,7 @@ class FilePreparation implements ListenerInterface {
         $fileIdentifier = $request->getFileIdentifier();
 
         if ($actualHash !== $fileIdentifier) {
-            $e = new Exception('Hash mismatch', 400);
+            $e = new FileException('Hash mismatch', 400);
             $e->setImboErrorCode(Exception::IMAGE_HASH_MISMATCH);
 
             throw $e;
@@ -72,7 +73,7 @@ class FilePreparation implements ListenerInterface {
         $mime = $finfo->buffer($fileBlob);
 
         if (!File::supportedMimeType($mime)) {
-            $e = new Exception('Unsupported file type: ' . $mime, 415);
+            $e = new FileException('Unsupported file type: ' . $mime, 415);
             $e->setImboErrorCode(Exception::IMAGE_UNSUPPORTED_MIMETYPE);
 
             throw $e;

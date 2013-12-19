@@ -180,6 +180,7 @@ $config = array(
             'listener' => 'ImboFile\EventListener\DatabaseOperations',
             'priority' => 1,
         ),
+        "file.put" => "ImboFile\File\FilePreparation",
     ),
 
     /**
@@ -199,7 +200,7 @@ $config = array(
      * @var array
      */
     'routes' => array(
-        'file'    => '#^/users/(?<publicKey>[a-z0-9_-]{3,})/files/(?<fileIdentifier>[a-f0-9]{32})(\.(?<extension>doc|excel|txt|zip|rar|pdf|zip|ppt|csv))?$#',
+        'file'    => '#^/users/(?<publicKey>[a-z0-9_-]{3,})/files/(?<fileIdentifier>[a-f0-9]{32})(\.(?<extension>doc|excel|txt|zip|rar|pdf|zip|ppt|csv|mp4|jpg|jpeg|png|gif))?$#',
         'files'   => '#^/users/(?<publicKey>[a-z0-9_-]{3,})/files(/|(\.(?<extension>json|xml)))?$#',
         'filemetadata' => '#^/users/(?<publicKey>[a-z0-9_-]{3,})/files/(?<fileIdentifier>[a-f0-9]{32})/meta(?:data)?(/|\.(?<extension>json|xml))?$#',
     ),
