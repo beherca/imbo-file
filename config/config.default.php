@@ -180,7 +180,8 @@ $config = array(
             'listener' => 'ImboFile\EventListener\DatabaseOperations',
             'priority' => 1,
         ),
-        "file.put" => "ImboFile\File\FilePreparation",
+        'Imbo\EventListener\ResponseSender' => 'ImboFile\EventListener\ResponseSender',
+        'file.put' => 'ImboFile\File\FilePreparation',
     ),
 
     /**
@@ -190,7 +191,7 @@ $config = array(
      * @var array
      */
     'resources' => array(
-        'file' => "ImboFile\Resource\File",
+        'file' => 'ImboFile\Resource\File',
     ),
 
     /**
