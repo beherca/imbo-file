@@ -86,7 +86,6 @@ class File implements ResourceInterface {
      * @param EventInterface
      */
     public function get(EventInterface $event) {
-        printf('ok--------------');
         $request = $event->getRequest();
         $response = $event->getResponse();
         $eventManager = $event->getManager();

@@ -176,6 +176,10 @@ $config = array(
             'listener' => 'ImboFile\EventListener\StorageOperations',
             'priority' => 1,
         ),
+        'Imbo\EventListener\DatabaseOperations' => array(
+            'listener' => 'ImboFile\EventListener\DatabaseOperations',
+            'priority' => 1,
+        ),
     ),
 
     /**

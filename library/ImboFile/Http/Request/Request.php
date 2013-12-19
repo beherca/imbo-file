@@ -13,8 +13,10 @@ namespace ImboFile\Http\Request;
 
 use ImboFile\Model\File,
     Imbo\Exception\InvalidArgumentException,
+    Imbo\Http\Request\RequestInterface,
     Imbo\Router\Route,
-    Imbo\Http\Request\Request as ImboRequest;
+    Imbo\Model\Image,
+    Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 
 /**
  * Request class
@@ -22,15 +24,170 @@ use ImboFile\Model\File,
  * @author Beherca <beherca@gmail.com>
  * @package Http
  */
-class Request extends ImboRequest {
+class Request extends SymfonyRequest implements RequestInterface {
 
+    
     /**
      * File instance
      *
      * @var File
      */
     private $file;
+    
+    /**
+     * The private key
+     *
+     * @var string
+     */
+    private $privateKey;
+    
+    /**
+     * Image instance
+     *
+     * @var Image
+     */
+    private $image;
+    
+    /**
+     * Array of transformations
+     *
+     * @var array
+     */
+    private $transformations;
+    
+    /**
+     * The current route
+     *
+     * @param Route
+     */
+    private $route;
 
+    /**
+     * Set an image model
+     *
+     * @param Image $image An image model instance
+     * @return Request
+     */
+    public function setImage(Image $image) {
+      $this->image = $image;
+    
+      return $this;
+    }
+    
+    /**
+     * Get an image model attached to the request (on PUT)
+     *
+     * @return null|Image
+     */
+    public function getImage() {
+      return $this->image;
+    }
+    
+    /**
+     * Get image transformations from the request
+     *
+     * @return array
+     */
+    public function getTransformations() {
+      if ($this->transformations === null) {
+        $this->transformations = array();
+    
+        $transformations = $this->query->get('t', array());
+    
+        foreach ($transformations as $transformation) {
+          // See if the transformation has any parameters
+          $pos = strpos($transformation, ':');
+          $urlParams = '';
+    
+          if ($pos === false) {
+            // No params exist
+            $name = $transformation;
+          } else {
+            list($name, $urlParams) = explode(':', $transformation, 2);
+          }
+    
+          // Initialize params for the transformation
+          $params = array();
+    
+          // See if we have more than one parameter
+          if (strpos($urlParams, ',') !== false) {
+            $urlParams = explode(',', $urlParams);
+          } else {
+            $urlParams = array($urlParams);
+          }
+    
+          foreach ($urlParams as $param) {
+            $pos = strpos($param, '=');
+    
+            if ($pos !== false) {
+              $params[substr($param, 0, $pos)] = substr($param, $pos + 1);
+            }
+          }
+    
+          $this->transformations[] = array(
+              'name'   => $name,
+              'params' => $params,
+          );
+        }
+      }
+    
+      return $this->transformations;
+    }
+    
+    /**
+     * Get the image identifier from the URL
+     *
+     * @return string|null
+     */
+    public function getImageIdentifier() {
+      return $this->route ? $this->route->get('imageIdentifier') : null;
+    }
+    
+    /**
+     * Get the current requested extension (if any)
+     *
+     * @return string|null
+     */
+    public function getExtension() {
+      return $this->route ? $this->route->get('extension') : null;
+    }
+    
+    /**
+     * Get the URI without the Symfony normalization applied to the query string
+     *
+     * @return string
+     */
+    public function getRawUri() {
+      $query = $this->server->get('QUERY_STRING');
+    
+      if (!empty($query)) {
+        $query = '?' . $query;
+      }
+    
+      return $this->getSchemeAndHttpHost() . $this->getBaseUrl() . $this->getPathInfo() . $query;
+    }
+    
+    /**
+     * Get the current route
+     *
+     * @return Route
+     */
+    public function getRoute() {
+      return $this->route;
+    }
+    
+    /**
+     * Set the route
+     *
+     * @param Route $route The current route
+     * @return self
+     */
+    public function setRoute(Route $route) {
+      $this->route = $route;
+    
+      return $this;
+    }
+    
     /**
      * Set an file model
      *
