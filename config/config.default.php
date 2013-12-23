@@ -2,7 +2,7 @@
 /**
  * This file is part of the Imbo package
  *
- * (c) Christer Edvartsen <cogo@starzinger.net>
+ * (c) Beherca <beherca@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE file that was
  * distributed with this source code.
@@ -12,7 +12,7 @@ namespace Imbo;
 
 use ImboFile\Database\Doctrine,
     ImboFile\Database\MongoDB,
-    ImboFile\Storage\GridFs,
+    ImboFile\Storage\GridFS,
     ImboFile\Http\Request;
 
 $config = array(
